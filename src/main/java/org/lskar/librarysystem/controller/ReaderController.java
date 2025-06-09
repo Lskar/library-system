@@ -2,9 +2,7 @@ package org.lskar.librarysystem.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Delete;
 import org.lskar.librarysystem.entity.Reader;
 import org.lskar.librarysystem.entity.ResponseResult;
 import org.lskar.librarysystem.service.ReaderService;
