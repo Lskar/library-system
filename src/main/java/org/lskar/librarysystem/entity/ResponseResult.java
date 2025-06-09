@@ -20,7 +20,7 @@ public class ResponseResult <T>{
     @ApiModelProperty(value = "返回信息", required = true)
     private String message;
 
-    @ApiModelProperty(value = "返回数据", required = true)
+    @ApiModelProperty(value = "返回数据")
     private T data;
 
     private static <T> ResponseResult<T> response(Integer code, String message, T data) {
