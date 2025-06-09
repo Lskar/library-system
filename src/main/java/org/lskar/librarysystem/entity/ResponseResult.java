@@ -1,5 +1,7 @@
 package org.lskar.librarysystem.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +11,16 @@ import org.lskar.librarysystem.enums.HttpStatusEnum;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "响应结果")
 public class ResponseResult <T>{
+
+    @ApiModelProperty(value = "状态码", required = true)
     private Integer code;
 
+    @ApiModelProperty(value = "返回信息", required = true)
     private String message;
 
+    @ApiModelProperty(value = "返回数据", required = true)
     private T data;
 
     private static <T> ResponseResult<T> response(Integer code, String message, T data) {
