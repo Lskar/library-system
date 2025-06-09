@@ -1,6 +1,7 @@
 package org.lskar.librarysystem.entity;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,13 @@ import org.lskar.librarysystem.enums.Gender;
 @ApiModel(description = "管理员实体")
 public class Administrator {
 
+    @ApiModelProperty(value = "管理员ID", required = true)
     private String adminId;
+    @ApiModelProperty(value = "管理员名称", required = true)
     private String name;
+    @ApiModelProperty(value = "管理员密码", required = true)
     private String password;
+    @ApiModelProperty(value = "管理员性别", required = true)
     private Gender gender;
 
 }

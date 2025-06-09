@@ -22,8 +22,8 @@ public class BookController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "获取图书",notes = "获取指定图书的详细信息",httpMethod = "GET")
-    @ApiImplicitParam(name = "id",value = "图书ID",required = true,dataType = "Integer",paramType = "path")
-    public Book getBookById(@PathVariable Integer id) {
+    @ApiImplicitParam(name = "id",value = "图书ID",required = true,dataType = "String",paramType = "path")
+    public Book getBookById(@PathVariable String id) {
         return null;
     }
 
@@ -33,6 +33,20 @@ public class BookController {
     public void addBook(@RequestBody Book book) {
 
     }
+
+    @PutMapping
+    @ApiOperation(value = "更新图书",notes = "更新图书",httpMethod = "PUT")
+    @ApiImplicitParam(name = "book",value = "图书对象",required = true,dataType = "Book",paramType = "body")
+    public void updateBook(@RequestBody Book book) {
+
+    }
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除图书",notes = "删除指定图书",httpMethod = "DELETE")
+    @ApiImplicitParam(name = "id",value = "图书ID",required = true,dataType = "String",paramType = "path")
+    public void deleteBook(@PathVariable String id) {
+
+    }
+
 
 
 

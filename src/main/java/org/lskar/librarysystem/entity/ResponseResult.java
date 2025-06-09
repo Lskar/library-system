@@ -16,7 +16,6 @@ public class ResponseResult <T>{
 
     private T data;
 
-
     private static <T> ResponseResult<T> response(Integer code, String message, T data) {
 
 
