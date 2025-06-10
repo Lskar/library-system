@@ -1,12 +1,11 @@
 package org.lskar.librarysystem.entity;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.lskar.librarysystem.enums.Status;
+import org.lskar.librarysystem.enums.StatusEnum;
 import org.w3c.dom.Text;
 
 import java.time.LocalDate;
@@ -35,6 +34,6 @@ public class Book {
     @ApiModelProperty(value = "图书管理员ID", required = true)
     private String admin_id;
     @ApiModelProperty(value = "图书状态", required = true)
-    private Status status;
+    private StatusEnum statusEnum;
 
 }

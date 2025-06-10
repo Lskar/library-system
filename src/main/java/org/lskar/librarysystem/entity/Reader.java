@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.lskar.librarysystem.enums.Gender;
+import org.lskar.librarysystem.enums.GenderEnum;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Reader {
     @ApiModelProperty(value = "密码", required = true)
     private String password;
     @ApiModelProperty(value = "性别", required = true)
-    private Gender gender;
+    private GenderEnum genderEnum;
     @ApiModelProperty(value = "注册时间", required = true)
     private LocalDate enrollDate;
     @ApiModelProperty(value = "用户类型", required = true)

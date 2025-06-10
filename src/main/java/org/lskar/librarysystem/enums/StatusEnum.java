@@ -1,6 +1,6 @@
 package org.lskar.librarysystem.enums;
 
-public enum Status {
+public enum StatusEnum {
 
     ACCEPT,
     REFUSE
