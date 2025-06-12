@@ -2,6 +2,7 @@ package org.lskar.librarysystem.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.lskar.librarysystem.entity.Book;
+import org.lskar.librarysystem.entity.BookQueryParam;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface BookMapper {
     int insertBook(Book book);
     void deleteBookByIds(Integer[] ids);
     Book selectBookById(Integer id);
-    List<Book> selectBookBy(Book book);
+    List<Book> selectBookBy(BookQueryParam bookQueryParam);
 }

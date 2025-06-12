@@ -51,20 +51,23 @@
 
     <select id="selectBookBy" resultType="org.lskar.librarysystem.entity.Book">
         SELECT * FROM book
-     <where>
-         <if test="title != null">
-             title LIKE CONCAT('%', #{title}, '%')
-         </if>
-     <if test="author != null">
-         AND author LIKE CONCAT('%', #{author}, '%')
-     </if>
-     <if test="category != null">
-         AND category LIKE CONCAT('%', #{category}, '%')
-     </if>
-     <if test="statusEnum != null">
-         AND statusEnum = #{statusEnum}
-     </if>
-     </where>
+        <where>
+            <if test="title != null">
+                title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="author != null">
+                AND author LIKE CONCAT('%', #{author}, '%')
+            </if>
+            <if test="category != null">
+                AND category LIKE CONCAT('%', #{category}, '%')
+            </if>
+            <if test="statusEnum != null">
+                AND status = #{statusEnum}
+            </if>
+            <if test="begin != null and end != null and begin != '' and end != ''">
+                AND publish_date BETWEEN #{begin} AND #{end}
+            </if>
+        </where>
     </select>
 
 

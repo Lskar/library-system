@@ -49,9 +49,6 @@ CREATE TABLE BorrowRecord
     borrow_date DATE        NOT NULL COMMENT '借阅日期',
     return_date DATE COMMENT '归还日期',
     admin_id  VARCHAR(20) COMMENT '操作管理员',
-    FOREIGN KEY (user_id) REFERENCES Reader (user_id),
-    FOREIGN KEY (book_id) REFERENCES Book (book_id),
-    FOREIGN KEY (admin_id) REFERENCES Administrator (admin_id)
 ) COMMENT '借阅归还记录表';
 
 -- 为常用查询字段添加索引

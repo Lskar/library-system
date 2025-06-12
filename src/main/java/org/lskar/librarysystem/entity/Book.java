@@ -32,7 +32,7 @@ public class Book {
     @ApiModelProperty(value = "图书简介")
     private String summary;
     @ApiModelProperty(value = "图书管理员ID", required = true)
-    private String admin_id;
+    private String adminId;
     @ApiModelProperty(value = "图书状态", required = true)
     private StatusEnum statusEnum;
 

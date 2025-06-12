@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lskar.librarysystem.mapper.ReaderMapper">
+
+
+    <select id="selectReaderById" resultType="org.lskar.librarysystem.entity.Reader">
+        SELECT * FROM reader WHERE id = #{id}
+    </select>
+
+    <insert id="insertReader">
+        INSERT INTO reader (id,name,password,gender,enroll_date,user_type,borrow_limit) VALUES (#{id},#{name},#{password},#{gender},#{enrollDate},#{userType},#{borrowLimit})
+    </insert>
+
+    <update id="updateReader">
+        UPDATE reader SET
+        <if test="name != null">name = #{name},</if>
+        <if test="password != null">password = #{password},</if>
+        <if test="gender != null">gender = #{gender},</if>
+        <if test="enrollDate != null">enroll_date = #{enrollDate},</if>
+        <if test="userType != null">user_type = #{userType},</if>
+        <if test="borrowLimit != null">borrow_limit = #{borrowLimit},</if>
+    </update>
+
+    <delete id="deleteReaderByIds">
+        DELETE FROM reader WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

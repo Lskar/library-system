@@ -1,6 +1,10 @@
 package org.lskar.librarysystem.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.lskar.librarysystem.entity.Book;
+import org.lskar.librarysystem.entity.BookQueryParam;
+import org.lskar.librarysystem.entity.PageResult;
 import org.lskar.librarysystem.exception.NotFoundException;
 import org.lskar.librarysystem.mapper.BookMapper;
 import org.lskar.librarysystem.service.BookService;
@@ -16,8 +20,10 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public List<Book> list() {
-        return List.of();
+    public PageResult<Book> selectBookByQueryParam(BookQueryParam bookQueryParam) {
+        PageHelper.startPage(bookQueryParam.getPage(),bookQueryParam.getPageSize());
+        Page<Book> pageInfo = (Page<Book>)bookMapper.selectBookBy(bookQueryParam);
+        return new PageResult<>(pageInfo.getTotal(),pageInfo.getResult());
     }
 
     @Override

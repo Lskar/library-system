@@ -3,14 +3,17 @@ package org.lskar.librarysystem.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.lskar.librarysystem.entity.Book;
+import org.lskar.librarysystem.entity.BookQueryParam;
+import org.lskar.librarysystem.entity.PageResult;
 import org.lskar.librarysystem.entity.ResponseResult;
 import org.lskar.librarysystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/books")
 @Api(tags = "图书控制")
@@ -21,8 +24,9 @@ public class BookController {
 
     @GetMapping
     @ApiOperation(value = "获取图书列表", notes = "获取所有图书的详细信息", httpMethod = "GET")
-    public ResponseResult<List<Book>> list() {
-        return ResponseResult.success(bookService.list());
+    public ResponseResult<PageResult<Book>> page(BookQueryParam bookQueryParam) {
+        PageResult<Book> bookPageResult = bookService.selectBookByQueryParam(bookQueryParam);
+        return ResponseResult.success(bookPageResult);
     }
 
     @GetMapping("/{id}")
