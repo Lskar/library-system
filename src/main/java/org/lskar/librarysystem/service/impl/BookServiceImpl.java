@@ -1,6 +1,7 @@
 package org.lskar.librarysystem.service.impl;
 
 import org.lskar.librarysystem.entity.Book;
+import org.lskar.librarysystem.exception.NotFoundException;
 import org.lskar.librarysystem.mapper.BookMapper;
 import org.lskar.librarysystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void insert(Book book) {
-
+        int result =bookMapper.insertBook(book);
+        if(result == 0){
+            throw new NotFoundException("插入数据失败");
+        }
     }
 
     @Override

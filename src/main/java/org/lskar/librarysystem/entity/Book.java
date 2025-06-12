@@ -30,7 +30,7 @@ public class Book {
     @ApiModelProperty(value = "图书价格", required = true)
     private double price;
     @ApiModelProperty(value = "图书简介")
-    private Text summary;
+    private String summary;
     @ApiModelProperty(value = "图书管理员ID", required = true)
     private String admin_id;
     @ApiModelProperty(value = "图书状态", required = true)

@@ -36,6 +36,7 @@ public class BookController {
     @ApiOperation(value = "添加图书", notes = "添加图书", httpMethod = "POST")
     @ApiImplicitParam(name = "book", value = "图书对象", required = true, dataType = "Book", paramType = "body")
     public ResponseResult<Void> addBook(@RequestBody Book book) {
+        bookService.insert(book);
         return ResponseResult.success();
     }
 

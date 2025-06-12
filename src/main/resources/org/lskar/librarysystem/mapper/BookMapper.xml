@@ -17,7 +17,7 @@
             category = #{category},
         </if>
         <if test="publishDate != null">
-            publishDate = #{publishDate},
+            publish_date = #{publishDate},
         </if>
         <if test="price != null">
             price = #{price},
@@ -29,13 +29,13 @@
             admin_id = #{admin_id},
         </if>
         <if test="statusEnum != null">
-            statusEnum = #{statusEnum},
+            status = #{statusEnum},
         </if>
     </update>
 
     <insert id="insertBook">
-        INSERT INTO book (title, author, publisher, category, publishDate, price, summary, admin_id, statusEnum)
- VALUES (#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{admin_id}, #{statusEnum});
+        INSERT INTO book (book_id,title, author, publisher, category, publish_date, price, summary, admin_id, status)
+ VALUES (#{bookId},#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{admin_id}, #{statusEnum});
     </insert>
 
     <delete id="deleteBookByIds">

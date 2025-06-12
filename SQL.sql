@@ -32,7 +32,7 @@ CREATE TABLE Book
     publisher    VARCHAR(100) COMMENT '出版社',
     publish_date date COMMENT '出版日期',
     price        DECIMAL(10, 2) COMMENT '价格',
-    summary      TEXT COMMENT '摘要',
+    summary      VARCHAR(2000) COMMENT '摘要',
     admin_id  VARCHAR(20) COMMENT '操作管理员',
     status       enum('ACCEPT', 'REFUSE') default 'ACCEPT' COMMENT '图书状态',
     FOREIGN KEY (admin_id) REFERENCES Administrator (admin_id)
