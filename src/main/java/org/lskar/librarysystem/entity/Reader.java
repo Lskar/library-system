@@ -31,4 +31,5 @@ public class Reader {
     private Integer borrowLimit;
     @ApiModelProperty(value = "借阅记录")
     List<BorrowRecord> borrowRecords;
+    //(#{userId},#{password},#{userName},#{genderEnum},#{enrollDate},#{userType},#{borrowLimit})
 }

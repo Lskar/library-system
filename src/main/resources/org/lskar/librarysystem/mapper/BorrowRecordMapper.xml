@@ -3,8 +3,8 @@
 <mapper namespace="org.lskar.librarysystem.mapper.BorrowRecordMapper">
 
     <insert id="insertBorrowRecord">
-    INSERT INTO borrow_record (book_id, user_id, borrow_date, return_date,admin_id)
-    VALUES (#{bookId}, #{userId}, #{borrowDate}, #{returnDate} ,#{adminId})
+    INSERT INTO borrow_record (user_id,book_id,  borrow_date, return_date,admin_id)
+    VALUES (#{userId},#{bookId},  #{borrow_date}, #{return_date} ,#{admin_id})
     </insert>
 
     <update id="updateBorrowRecord">
