@@ -3,29 +3,35 @@
 <mapper namespace="org.lskar.librarysystem.mapper.BorrowRecordMapper">
 
     <insert id="insertBorrowRecord">
-    INSERT INTO borrowRecord (user_id,book_id,  borrow_date, return_date,admin_id)
-    VALUES (#{userId},#{bookId},  #{borrow_date}, #{return_date} ,#{admin_id})
+        INSERT INTO borrowRecord (user_id, book_id, borrow_date, return_date, admin_id)
+        VALUES (#{userId}, #{bookId}, #{borrowDate}, #{returnDate},#{adminId})
     </insert>
 
     <update id="updateBorrowRecord">
-    UPDATE borrowRecord SET
-        <if test="bookId != null">book_id = #{bookId},</if>
-        <if test="userId != null">user_id = #{userId},</if>
-        <if test="borrowDate != null">borrow_date = #{borrowDate},</if>
-        <if test="returnDate != null">return_date = #{returnDate},</if>
-        <if test="adminId != null">admin_id = #{adminId}</if>
-    WHERE id = #{id}
+        UPDATE borrowrecord SET
+        <if test="returnDate != null">return_date = #{returnDate}</if>
+        WHERE record_id = #{recordId}
     </update>
 
     <delete id="deleteBorrowRecordByIds">
-    DELETE FROM borrowRecord WHERE id IN
-    <foreach collection="ids" item="id" open="(" separator="," close=")">
-        #{id}
-    </foreach>
+        DELETE FROM borrowRecord WHERE record_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteRecordByReaderId">
+        DELETE FROM borrowRecord WHERE user_id = #{id}
     </delete>
 
-    <select id="selectBorrowRecordById" resultType="org.lskar.librarysystem.entity.BorrowRecord">
-    SELECT * FROM borrowRecord WHERE id = #{id}
+    <select id="selectBorrowRecordBy" resultType="org.lskar.librarysystem.entity.BorrowRecord">
+        SELECT *
+        FROM borrowRecord
+        <where>
+            user_id = #{userId}
+            <if test="bookId != null and bookId != ''">book_id = #{bookId}</if>
+            <if test="adminId != null and adminId != ''">admin_id = #{adminId}</if>
+            <if test="begin != null and end != null and begin != '' and end != ''">borrow_date BETWEEN #{begin} AND #{end}</if>
+        </where>
     </select>
 
 </mapper>

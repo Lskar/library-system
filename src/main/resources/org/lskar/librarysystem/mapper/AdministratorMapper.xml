@@ -2,30 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lskar.librarysystem.mapper.AdministratorMapper">
     <insert id="insertAdmin">
-        insert into Administrator (admin_id,password,name,gender) values (#{adminId},#{password},#{username},#{gender})
+        insert into Administrator (admin_id,password,name,gender) values (#{adminId},#{password},#{name},#{gender})
     </insert>
 
     <delete id="deleteAdminByIds">
-        delete from Administrator where adminId in
+        delete from Administrator where admin_id in
         <foreach collection="ids" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
     <update id="updateAdminBy">
-        update Administrator set
-        <if test="username != null">name = #{username},</if>
-        <if test="password != null">password = #{password},</if>
+        update Administrator
+        <set>
+        <if test="name != null and name != ''">name = #{name},</if>
+        <if test="password != null and password != ''">password = #{password},</if>
         <if test="gender != null">gender = #{gender}</if>
+        </set>
         where admin_id = #{adminId}
     </update>
 
-<select id="selectAdminBy" resultType="org.lskar.librarysystem.entity.Administrator">
-    select * from Administrator
-    <where>
-        <if test="adminId != null">admin_id = #{adminId}</if>
-        <if test="username != null">name = #{username}</if>
-        <if test="password != null">password = #{password}</if>
-    </where>
+<select id="selectAdminById" resultType="org.lskar.librarysystem.entity.Administrator">
+    select * from Administrator where admin_id = #{adminId}
 </select>
 </mapper>

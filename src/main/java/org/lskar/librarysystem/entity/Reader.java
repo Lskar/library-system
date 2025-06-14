@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.lskar.librarysystem.enums.GenderEnum;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,11 +17,11 @@ public class Reader {
     @ApiModelProperty(value = "用户ID", required = true)
     private String userId;
     @ApiModelProperty(value = "用户名", required = true)
-    private String userName;
+    private String name;
     @ApiModelProperty(value = "密码", required = true)
     private String password;
     @ApiModelProperty(value = "性别", required = true)
-    private GenderEnum genderEnum;
+    private GenderEnum gender;
     @ApiModelProperty(value = "注册时间", required = true)
     private LocalDate enrollDate;
     @ApiModelProperty(value = "用户类型", required = true)

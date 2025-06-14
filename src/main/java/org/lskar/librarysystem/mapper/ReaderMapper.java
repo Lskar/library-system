@@ -8,9 +8,9 @@ import java.util.List;
 @Mapper
 public interface ReaderMapper {
 
-    int insertReader();
-    int deleteReaderByIds(Integer[] ids);
+    int insertReader(Reader reader);
+    int deleteReaderById(String id);
     int updateReader(Reader reader);
-    Reader selectReaderById(Integer id);
-
+    Reader selectReaderById(String id);
+    List<Reader> selectAllReader();
 }

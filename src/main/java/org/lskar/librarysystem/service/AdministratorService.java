@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface AdministratorService {
 
-    List<Administrator> list();
+    Administrator selectById(String id);
 
     void update(Administrator administrator);
 
     void insert(Administrator administrator);
 
-    void delete(String id);
+    void delete(List<String> ids);
 }

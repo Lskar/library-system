@@ -20,6 +20,6 @@ public class Administrator {
     @ApiModelProperty(value = "管理员密码", required = true)
     private String password;
     @ApiModelProperty(value = "管理员性别", required = true)
-    private GenderEnum genderEnum;
+    private GenderEnum gender;
 
 }

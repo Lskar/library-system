@@ -21,13 +21,10 @@ public class BorrowRecord {
     private String userId;
     @ApiModelProperty(value = "图书ID", required = true)
     private String bookId;
-    @ApiModelProperty(value = "管理员ID", required = true)
+    @ApiModelProperty(value = "管理员ID")
     private String adminId;
     @ApiModelProperty(value = "借阅时间", required = true)
     private LocalDate borrowDate;
     @ApiModelProperty(value = "归还时间")
     private LocalDate returnDate;
-//    public void setRecordId(Integer recordId) {
-//        this.recordId = recordId;
-//    }
 }

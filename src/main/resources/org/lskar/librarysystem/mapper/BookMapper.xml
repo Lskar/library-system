@@ -17,7 +17,7 @@
         <if test="category != null and category != ''">
             category = #{category},
         </if>
-        <if test="publishDate != null and publishDate != ''">
+        <if test="publishDate != null">
             publish_date = #{publishDate},
         </if>
         <if test="price != null and price != ''">
@@ -25,9 +25,6 @@
         </if>
         <if test="summary != null and summary != ''">
             summary = #{summary},
-        </if>
-        <if test="adminId != null and adminId != ''">
-            admin_id = #{adminId},
         </if>
         <if test="status != null">
             status = #{status},
@@ -64,8 +61,8 @@
             <if test="category != null">
                 AND category LIKE CONCAT('%', #{category}, '%')
             </if>
-            <if test="statusEnum != null">
-                AND status = #{statusEnum}
+            <if test="status != null">
+                AND status = #{status}
             </if>
             <if test="begin != null and end != null and begin != '' and end != ''">
                 AND publish_date BETWEEN #{begin} AND #{end}

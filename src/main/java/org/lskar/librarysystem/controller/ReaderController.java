@@ -41,6 +41,7 @@ public class ReaderController {
     @ApiOperation(value = "添加读者",notes = "添加读者",httpMethod = "POST")
     @ApiImplicitParam(name = "reader",value = "读者对象",required = true,dataType = "Reader",paramType = "body")
     public ResponseResult<Void> addReader(@RequestBody Reader reader) {
+        readerService.insert(reader);
         return ResponseResult.success();
     }
 
@@ -48,6 +49,7 @@ public class ReaderController {
     @ApiOperation(value = "删除读者",notes = "删除指定读者",httpMethod = "DELETE")
     @ApiImplicitParam(name = "id",value = "读者ID",required = true,dataType = "String",paramType = "path")
     public ResponseResult<Void> deleteReader(@PathVariable String id) {
+        readerService.delete(id);
         return ResponseResult.success();
     }
 
@@ -55,6 +57,7 @@ public class ReaderController {
     @ApiOperation(value = "更新读者",notes = "更新读者",httpMethod = "PUT")
     @ApiImplicitParam(name = "reader",value = "读者对象",required = true,dataType = "Reader",paramType = "body")
     public ResponseResult<Void> updateReader(@RequestBody Reader reader) {
+        readerService.update(reader);
         return ResponseResult.success();
     }
 

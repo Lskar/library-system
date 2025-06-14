@@ -1,6 +1,6 @@
 package org.lskar.librarysystem.enums;
 
 public enum GenderEnum {
-    MEN,
+    MAN,
     WOMEN,
 }
