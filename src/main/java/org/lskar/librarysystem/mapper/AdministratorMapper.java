@@ -7,7 +7,7 @@ import java.util.List;
 @Mapper
 public interface AdministratorMapper {
     void insertAdmin();
-    void deleteAdminByIds(List ids);
+    void deleteAdminByIds(List<Integer> ids);
     void updateAdminBy();
     void selectAdminBy();
 }

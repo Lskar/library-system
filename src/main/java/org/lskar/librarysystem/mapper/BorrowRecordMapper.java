@@ -7,7 +7,7 @@ import java.util.List;
 @Mapper
 public interface BorrowRecordMapper {
     void insertBorrowRecord();
-    void deleteBorrowRecordByIds(List ids);
+    void deleteBorrowRecordByIds(List<Integer> ids);
     void updateBorrowRecord();
     void selectBorrowRecordById();
 }
