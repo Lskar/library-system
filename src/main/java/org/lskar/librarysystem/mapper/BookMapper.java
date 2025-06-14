@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface BookMapper {
 
-    void updateBookById(Book book);
+    int updateBookById(Book book);
     int insertBook(Book book);
-    void deleteBookByIds(Integer[] ids);
-    Book selectBookById(Integer id);
+    int deleteBookByIds(List<String> ids);
+    Book selectBookById(String id);
     List<Book> selectBookBy(BookQueryParam bookQueryParam);
 }

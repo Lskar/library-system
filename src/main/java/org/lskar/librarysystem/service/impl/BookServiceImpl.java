@@ -28,7 +28,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(String id) {
-        return null;
+        Book book = bookMapper.selectBookById(id);
+        if(book == null){
+            throw new NotFoundException("未找到编号为"+id+"的图书");
+        }
+        return book;
     }
 
     @Override
@@ -41,11 +45,17 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void update(Book book) {
-
+        int result =bookMapper.updateBookById(book);
+        if(result == 0){
+            throw new NotFoundException("更新数据失败");
+        }
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete(List<String> ids) {
+        int result =bookMapper.deleteBookByIds(ids);
+        if(result == 0){
+            throw new NotFoundException("批量删除数据失败");
+        }
     }
 }

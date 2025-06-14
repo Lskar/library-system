@@ -3,50 +3,53 @@
 <mapper namespace="org.lskar.librarysystem.mapper.BookMapper">
 
     <update id="updateBookById">
-        UPDATE Book SET
-        <if test="title != null">
+        UPDATE Book
+        <set>
+        <if test="title != null and title != ''">
             title = #{title},
         </if>
-        <if test="author != null">
+        <if test="author != null and author != ''">
             author = #{author},
         </if>
-        <if test="publisher != null">
+        <if test="publisher != null and publisher != ''">
             publisher = #{publisher},
         </if>
-        <if test="category != null">
+        <if test="category != null and category != ''">
             category = #{category},
         </if>
-        <if test="publishDate != null">
+        <if test="publishDate != null and publishDate != ''">
             publish_date = #{publishDate},
         </if>
-        <if test="price != null">
+        <if test="price != null and price != ''">
             price = #{price},
         </if>
-        <if test="summary != null">
+        <if test="summary != null and summary != ''">
             summary = #{summary},
         </if>
-        <if test="admin_id != null">
-            admin_id = #{admin_id},
+        <if test="adminId != null and adminId != ''">
+            admin_id = #{adminId},
         </if>
-        <if test="statusEnum != null">
-            status = #{statusEnum},
+        <if test="status != null">
+            status = #{status},
         </if>
+        </set>
+        where book_id = #{bookId}
     </update>
 
     <insert id="insertBook">
-        INSERT INTO book (title, author, publisher, category, publish_date, price, summary, admin_id, statu)
- VALUES (#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{admin_id}, #{statusEnum});
+        INSERT INTO book (book_id,title, author, publisher, category, publish_date, price, summary, admin_id, status)
+ VALUES (#{bookId},#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{adminId}, #{status});
     </insert>
 
     <delete id="deleteBookByIds">
-        DELETE FROM book WHERE id IN
+        DELETE FROM book WHERE book_id IN
         <foreach collection="ids" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
     <select id="selectBookById" resultType="org.lskar.librarysystem.entity.Book">
-        SELECT * FROM book WHERE id = #{id}
+        SELECT * FROM book WHERE book_id = #{id}
     </select>
 
     <select id="selectBookBy" resultType="org.lskar.librarysystem.entity.Book">
