@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lskar.librarysystem.mapper.ReaderMapper">
     <insert id="insertReader" parameterType="org.lskar.librarysystem.entity.Reader">
-        INSERT INTO reader (user_id,password,name,gender,enroll_date,user_type,borrow_limit)
-        VALUES  (#{user_id},#{password},#{name},#{gender},#{enroll_date},#{user_type},#{borrow_limit})
+        INSERT INTO Reader (user_id,password,name,gender,enroll_date,user_type,borrow_limit)
+        VALUES  (#{userId},#{password},#{name},#{gender},#{enrollDate},#{userType},#{borrowLimit})
     </insert>
 
     <update id="updateReader">
-        UPDATE reader SET Reader
+        UPDATE Reader SET
         <if test="password != null">
             password = #{password},
         </if>
@@ -26,11 +26,12 @@
         <if test="borrowLimit != null">
             borrow_limit = #{borrowLimit}
         </if>
+        WHERE user_id = #{userId}
     </update>
 
 
 <delete id="deleteReader">
-    DELETE FROM reader WHERE
+    DELETE FROM Reader WHERE
     <if test="userId != null">
         user_id = #{userId}
     </if>
