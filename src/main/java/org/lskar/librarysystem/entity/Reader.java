@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @ApiModel(description = "读者实体")
 public class Reader {
+
     @ApiModelProperty(value = "用户ID", required = true)
     private String userId;
     @ApiModelProperty(value = "用户名", required = true)

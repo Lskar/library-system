@@ -3,7 +3,7 @@
 <mapper namespace="org.lskar.librarysystem.mapper.BookMapper">
 
     <update id="updateBookById">
-        UPDATE book SET
+        UPDATE Book SET
         <if test="title != null">
             title = #{title},
         </if>
@@ -34,8 +34,8 @@
     </update>
 
     <insert id="insertBook">
-        INSERT INTO book (book_id,title, author, publisher, category, publish_date, price, summary, admin_id, status)
- VALUES (#{bookId},#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{admin_id}, #{statusEnum});
+        INSERT INTO book (title, author, publisher, category, publish_date, price, summary, admin_id, statu)
+ VALUES (#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{admin_id}, #{statusEnum});
     </insert>
 
     <delete id="deleteBookByIds">
