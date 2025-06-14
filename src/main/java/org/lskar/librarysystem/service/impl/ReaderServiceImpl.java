@@ -1,15 +1,19 @@
 package org.lskar.librarysystem.service.impl;
 
+import org.lskar.librarysystem.entity.LoginInfo;
 import org.lskar.librarysystem.entity.Reader;
 import org.lskar.librarysystem.exception.NotFoundException;
 import org.lskar.librarysystem.mapper.BorrowRecordMapper;
 import org.lskar.librarysystem.mapper.ReaderMapper;
 import org.lskar.librarysystem.service.ReaderService;
+import org.lskar.librarysystem.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReaderServiceImpl implements ReaderService {
@@ -63,4 +67,19 @@ public class ReaderServiceImpl implements ReaderService {
         }
         borrowRecordMapper.deleteRecordByReaderId(id);
     }
+
+    @Override
+    public LoginInfo login(Reader reader) {
+
+        Reader readerImpl = readerMapper.selectReaderByIdAndPassword(reader);
+        if(readerImpl == null){
+            throw new NotFoundException("用户id或密码错误");
+        }
+        Map<String, Object> claims = Map.of("userId",readerImpl.getUserId(),"name",readerImpl.getName());
+        String token = JwtUtils.generateToken(claims);
+        return new LoginInfo(readerImpl.getUserId(),readerImpl.getName(),token);
+    }
+
+
+
 }

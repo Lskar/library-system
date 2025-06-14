@@ -13,4 +13,6 @@ public interface ReaderMapper {
     int updateReader(Reader reader);
     Reader selectReaderById(String id);
     List<Reader> selectAllReader();
+    Reader selectReaderByIdAndPassword(Reader reader);
+
 }

@@ -40,5 +40,12 @@
         FROM reader
     </select>
 
+    <select id="selectReaderByIdAndPassword" resultType="org.lskar.librarysystem.entity.Reader">
+        SELECT user_id,name
+        FROM reader
+        WHERE user_id = #{userId}
+          AND password = #{password}
+    </select>
+
 
 </mapper>
