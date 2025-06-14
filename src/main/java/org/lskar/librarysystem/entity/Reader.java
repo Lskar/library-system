@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @ApiModel(description = "读者实体")
 public class Reader {
-
     @ApiModelProperty(value = "用户ID", required = true)
     private String userId;
     @ApiModelProperty(value = "用户名", required = true)
@@ -29,6 +28,4 @@ public class Reader {
     private String userType;
     @ApiModelProperty(value = "借阅限制", required = true)
     private Integer borrowLimit;
-    @ApiModelProperty(value = "借阅记录")
-    List<BorrowRecord> borrowRecords;
 }

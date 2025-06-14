@@ -5,12 +5,13 @@
 <mapper namespace="org.lskar.librarysystem.mapper.ReaderMapper">
 
 
+
     <select id="selectReaderById" resultType="org.lskar.librarysystem.entity.Reader">
-        SELECT * FROM reader WHERE id = #{id}
+        SELECT * FROM Reader WHERE id = #{id}
     </select>
 
     <insert id="insertReader">
-        INSERT INTO reader (id,name,password,gender,enroll_date,user_type,borrow_limit) VALUES (#{id},#{name},#{password},#{gender},#{enrollDate},#{userType},#{borrowLimit})
+        INSERT INTO Reader (id,name,password,gender,enroll_date,user_type,borrow_limit) VALUES (#{id},#{name},#{password},#{gender},#{enrollDate},#{userType},#{borrowLimit})
     </insert>
 
     <update id="updateReader">
