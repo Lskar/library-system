@@ -53,17 +53,36 @@
         SELECT * FROM book
      <where>
          <if test="title != null">
-             title LIKE CONCAT('%', #{title}, '%')
+                  title=#{title}
          </if>
-     <if test="author != null">
-         AND author LIKE CONCAT('%', #{author}, '%')
-     </if>
-     <if test="category != null">
-         AND category LIKE CONCAT('%', #{category}, '%')
-     </if>
-     <if test="statusEnum != null">
-         AND status = #{statusEnum}
-     </if>
+         <if test="author != null">
+                  AND author=#{author}
+         </if>
+         <if test="publisher != null">
+                  AND publisher=#{publisher}
+         </if>
+         <if test="category != null">
+                  AND category=#{category}
+         </if>
+         <if  test="publishDate != null">
+                 AND publisher=#{publisher}
+         </if>
+         <if test="publishDate != null">
+                  AND publish_date=#{publishDate}
+         </if>
+         <if test="price != null">
+                  AND price=#{price}
+         </if>
+         <if test="summary != null">
+                  AND summary=#{summary}
+         </if>
+         <if test="admin_id != null">
+                  AND admin_id=#{admin_id}
+         </if>
+         <if test="statusEnum != null">
+                  AND status=#{statusEnum}
+         </if>
+
      </where>
     </select>
 

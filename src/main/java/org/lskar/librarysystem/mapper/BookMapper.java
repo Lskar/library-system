@@ -10,7 +10,7 @@ public interface BookMapper {
 
     void updateBookById(Book book);
     void insertBook(Book book);
-    void deleteBookByIds(Integer[] ids);
+    void deleteBookByIds(List ids);
     Book selectBookById(Integer id);
     List<Book> selectBookBy(Book book);
 }

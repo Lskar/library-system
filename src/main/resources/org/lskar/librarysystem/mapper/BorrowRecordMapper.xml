@@ -3,12 +3,12 @@
 <mapper namespace="org.lskar.librarysystem.mapper.BorrowRecordMapper">
 
     <insert id="insertBorrowRecord">
-    INSERT INTO borrow_record (user_id,book_id,  borrow_date, return_date,admin_id)
+    INSERT INTO borrowRecord (user_id,book_id,  borrow_date, return_date,admin_id)
     VALUES (#{userId},#{bookId},  #{borrow_date}, #{return_date} ,#{admin_id})
     </insert>
 
     <update id="updateBorrowRecord">
-    UPDATE borrow_record SET
+    UPDATE borrowRecord SET
         <if test="bookId != null">book_id = #{bookId},</if>
         <if test="userId != null">user_id = #{userId},</if>
         <if test="borrowDate != null">borrow_date = #{borrowDate},</if>
@@ -18,14 +18,14 @@
     </update>
 
     <delete id="deleteBorrowRecordByIds">
-    DELETE FROM borrow_record WHERE id IN
-    <foreach collection="array" item="id" open="(" separator="," close=")">
+    DELETE FROM borrowRecord WHERE id IN
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
         #{id}
     </foreach>
     </delete>
 
     <select id="selectBorrowRecordById" resultType="org.lskar.librarysystem.entity.BorrowRecord">
-    SELECT * FROM borrow_record WHERE id = #{id}
+    SELECT * FROM borrowRecord WHERE id = #{id}
     </select>
 
 </mapper>
