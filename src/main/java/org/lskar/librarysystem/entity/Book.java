@@ -30,11 +30,10 @@ public class Book {
     @ApiModelProperty(value = "图书价格", required = true)
     private double price;
     @ApiModelProperty(value = "图书简介")
-
     private String summary;
     @ApiModelProperty(value = "图书管理员ID", required = true)
     private String adminId;
     @ApiModelProperty(value = "图书状态", required = true)
-    private StatusEnum statusEnum;
+    private StatusEnum status;
 
 }
