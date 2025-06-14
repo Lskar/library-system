@@ -3,7 +3,7 @@
 <mapper namespace="org.lskar.librarysystem.mapper.BookMapper">
 
     <update id="updateBookById">
-        UPDATE book SET
+        UPDATE Book SET
         <if test="title != null">
             title = #{title},
         </if>
@@ -17,7 +17,7 @@
             category = #{category},
         </if>
         <if test="publishDate != null">
-            publishDate = #{publishDate},
+            publish_date = #{publishDate},
         </if>
         <if test="price != null">
             price = #{price},
@@ -29,12 +29,12 @@
             admin_id = #{admin_id},
         </if>
         <if test="statusEnum != null">
-            statusEnum = #{statusEnum},
+            status = #{statusEnum},
         </if>
     </update>
 
     <insert id="insertBook">
-        INSERT INTO book (title, author, publisher, category, publishDate, price, summary, admin_id, statusEnum)
+        INSERT INTO book (title, author, publisher, category, publish_date, price, summary, admin_id, statu)
  VALUES (#{title}, #{author}, #{publisher}, #{category}, #{publishDate}, #{price}, #{summary}, #{admin_id}, #{statusEnum});
     </insert>
 
@@ -62,7 +62,7 @@
          AND category LIKE CONCAT('%', #{category}, '%')
      </if>
      <if test="statusEnum != null">
-         AND statusEnum = #{statusEnum}
+         AND status = #{statusEnum}
      </if>
      </where>
     </select>
