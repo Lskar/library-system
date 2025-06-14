@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lskar.librarysystem.mapper.ReaderMapper">
+    <insert id="insertReader" parameterType="org.lskar.librarysystem.entity.Reader">
+        INSERT INTO reader (user_id,password,name,gender,enroll_date,user_type,borrow_limit)
+        VALUES  (#{user_id},#{password},#{name},#{gender},#{enroll_date},#{user_type},#{borrow_limit})
+    </insert>
+
+    <update id="updateReader">
+        UPDATE reader SET Reader
+        <if test="password != null">
+            password = #{password},
+        </if>
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="gender != null">
+            gender = #{gender},
+        </if>
+        <if test="enrollDate != null">
+            enroll_date = #{enrollDate},
+        </if>
+        <if test="userType != null">
+            user_type = #{userType},
+        </if>
+        <if test="borrowLimit != null">
+            borrow_limit = #{borrowLimit}
+        </if>
+    </update>
+
+
+<delete id="deleteReader">
+    DELETE FROM reader WHERE
+    <if test="userId != null">
+        user_id = #{userId}
+    </if>
+    <if test="userName != null">
+        name = #{userName}
+    </if>
+    <if test="enrollDate != null">
+        enroll_date = #{enrolDate}
+    </if>
+    <if test="userType != null">
+        user_type = #{userType}
+    </if>
+    <if test="borrowLimit != null">
+        borrow_limit = #{borrowLimit}
+    </if>
+</delete>
+
+
+
+
+    <resultMap id="readerResultMap" type="org.lskar.librarysystem.entity.Reader">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="name"/>
+        <result property="password" column="password"/>
+        <result property="genderEnum" column="gender" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result property="enrollDate" column="enroll_date"/>
+        <result property="userType" column="user_type"/>
+        <result property="borrowLimit" column="borrow_limit"/>
+
+
+        <collection property="borrowRecords" ofType="org.lskar.librarysystem.entity.BorrowRecord">
+            <id property="recordId" column="record_id"/>
+            <result property="userId" column="br_user_id"/>
+            <result property="bookId" column="book_id"/>
+            <result property="borrowDate" column="borrow_date"/>
+            <result property="returnDate" column="return_date"/>
+            <result property="admin_id" column="admin_id"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectReaderById" resultMap="readerResultMap">
+        SELECT
+            r.user_id,
+            r.name,
+            r.password,
+            r.gender,
+            r.enroll_date,
+            r.user_type,
+            r.borrow_limit,
+            br.record_id,
+            br.user_id as br_user_id,
+            br.book_id,
+            br.borrow_date,
+            br.return_date,
+            br.admin_id
+        FROM
+            Reader r
+                LEFT JOIN
+            BorrowRecord br ON r.user_id = br.user_id
+        WHERE
+            r.user_id = #{userId}
+    </select>
+
+
+    <select id="selectAllReaders" resultMap="readerResultMap">
+        SELECT
+            r.user_id,
+            r.name,
+            r.password,
+            r.gender,
+            r.enroll_date,
+            r.user_type,
+            r.borrow_limit,
+            br.record_id,
+            br.user_id as br_user_id,
+            br.book_id,
+            br.borrow_date,
+            br.return_date,
+            br.admin_id
+        FROM
+            Reader r
+                LEFT JOIN
+            BorrowRecord br ON r.user_id = br.user_id
+    </select>
+
+</mapper>
