@@ -29,13 +29,6 @@ public class GlobalExceptionHandler {
         List<String> collect= constraintViolations.stream().map(ConstraintViolation::getMessage).toList();
         return ResponseResult.fail(HttpStatusEnum.BAD_REQUEST.getCode(),HttpStatusEnum.BAD_REQUEST.getMessage(),collect);
     }
-    //  处理 json 请求体调用接口校验失败抛出的异常
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseResult<List<String>> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
-//        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
-//        List<String> collect = fieldErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
-//        return ResponseResult.fail(HttpStatusEnum.BAD_REQUEST.getCode(),HttpStatusEnum.BAD_REQUEST.getMessage(),collect);
-//    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseResult<List<String>> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
@@ -67,25 +60,3 @@ public class GlobalExceptionHandler {
     }
 
 }
-
-//// 使用form data方式调用接口，校验异常抛出 BindException
-//// 使用 json 请求体调用接口，校验异常抛出 MethodArgumentNotValidException
-//// 单个参数校验异常抛出ConstraintViolationException
-//// 处理 json 请求体调用接口校验失败抛出的异常
-//@ExceptionHandler(MethodArgumentNotValidException.class)
-//public ResultVO<String> MethodArgumentNotValidException(MethodArgumentNotValidException e) {
-//    List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
-//    List<String> collect = fieldErrors.stream()
-//            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-//            .collect(Collectors.toList());
-//    return new ResultVO(ResultCode.VALIDATE_FAILED, collect);
-//}
-//// 使用form data方式调用接口，校验异常抛出 BindException
-//@ExceptionHandler(BindException.class)
-//public ResultVO<String> BindException(BindException e) {
-//    List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
-//    List<String> collect = fieldErrors.stream()
-//            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-//            .collect(Collectors.toList());
-//    return new ResultVO(ResultCode.VALIDATE_FAILED, collect);
-//}

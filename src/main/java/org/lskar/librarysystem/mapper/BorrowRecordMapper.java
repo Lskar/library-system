@@ -13,6 +13,9 @@ public interface BorrowRecordMapper {
     int deleteBorrowRecordByIds(List<String> ids);
     int deleteRecordByReaderId(String id);
     int updateBorrowRecord(BorrowRecord borrowRecord);
+    BorrowRecord selectBorrowRecordById(Integer id);
     @Options(useGeneratedKeys = true, keyProperty = "recordId", keyColumn = "record_id")
     List<BorrowRecord> selectBorrowRecordBy(BorrowRecordQueryParam borrowRecordQueryParam);
+
+    int countBorrowRecordByReaderId(String readerId);
 }

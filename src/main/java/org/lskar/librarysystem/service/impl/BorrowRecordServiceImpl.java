@@ -2,17 +2,13 @@ package org.lskar.librarysystem.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import org.lskar.librarysystem.entity.Book;
-import org.lskar.librarysystem.entity.BorrowRecord;
-import org.lskar.librarysystem.entity.BorrowRecordQueryParam;
-import org.lskar.librarysystem.entity.PageResult;
+import org.lskar.librarysystem.entity.*;
 import org.lskar.librarysystem.enums.StatusEnum;
-import org.lskar.librarysystem.exception.IsBorrowedException;
-import org.lskar.librarysystem.exception.NotFoundException;
-import org.lskar.librarysystem.exception.TimeEarlyException;
+import org.lskar.librarysystem.exception.*;
 import org.lskar.librarysystem.mapper.BorrowRecordMapper;
 import org.lskar.librarysystem.service.BookService;
 import org.lskar.librarysystem.service.BorrowRecordService;
+import org.lskar.librarysystem.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +24,9 @@ public class BorrowRecordServiceImpl implements BorrowRecordService {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private ReaderService readerService;
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -38,6 +37,15 @@ public class BorrowRecordServiceImpl implements BorrowRecordService {
         }
         book.setStatus(StatusEnum.REFUSE);
         bookService.update(book);
+
+        Reader reader = readerService.getReaderById(borrowRecord.getUserId());
+        if(reader.getBorrowLimit() <= 0){
+            throw new BorrowLimitException("借阅数量超出限制");
+        }
+        reader.setBorrowLimit(reader.getBorrowLimit()-1);
+        readerService.update(reader);
+
+
         borrowRecord.setAdminId(book.getAdminId());
         borrowRecord.setBorrowDate(LocalDate.now());
         int result = borrowRecordMapper.insertBorrowRecord(borrowRecord);
@@ -63,5 +71,24 @@ public class BorrowRecordServiceImpl implements BorrowRecordService {
         PageHelper.startPage(queryParam.getPage(),queryParam.getPageSize());
         Page<BorrowRecord> pageInfo = (Page<BorrowRecord>)borrowRecordMapper.selectBorrowRecordBy(queryParam);
         return new PageResult<>(pageInfo.getTotal(),pageInfo.getResult());
+    }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void returnBook(Integer recordId){
+        BorrowRecord borrowRecord = borrowRecordMapper.selectBorrowRecordById(recordId);
+        Book book = bookService.getBookById(borrowRecord.getBookId());
+        if(book.getStatus() != StatusEnum.REFUSE){
+            throw new IsReturnedException("图书状态异常");
+        }
+        book.setStatus(StatusEnum.ACCEPT);
+        bookService.update(book);
+
+        Reader reader = readerService.getReaderById(borrowRecord.getUserId());
+        reader.setBorrowLimit(reader.getBorrowLimit()+1);
+        readerService.update(reader);
+        borrowRecord.setReturnDate(LocalDate.now());
+        borrowRecordMapper.updateBorrowRecord(borrowRecord);
     }
 }

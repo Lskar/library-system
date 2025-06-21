@@ -19,13 +19,13 @@ public class BorrowRecordController {
     @Autowired
     private BorrowRecordService borrowRecordService;
 
-    @PutMapping
-    @ApiOperation(value = "更新借阅记录", notes = "更新借阅记录", httpMethod = "PUT")
-    @ApiImplicitParam(name = "borrowRecord", value = "借阅记录对象", required = true, dataType = "BorrowRecord", paramType = "body")
-    public ResponseResult<Void> updateBorrowRecord(@RequestBody BorrowRecord borrowRecord) {
-        borrowRecordService.update(borrowRecord);
-        return ResponseResult.success();
-    }
+//    @PutMapping
+//    @ApiOperation(value = "更新借阅记录", notes = "更新借阅记录", httpMethod = "PUT")
+//    @ApiImplicitParam(name = "borrowRecord", value = "借阅记录对象", required = true, dataType = "BorrowRecord", paramType = "body")
+//    public ResponseResult<Void> updateBorrowRecord(@RequestBody BorrowRecord borrowRecord) {
+//        borrowRecordService.update(borrowRecord);
+//        return ResponseResult.success();
+//    }
 
     @PostMapping
     @ApiOperation(value = "添加借阅记录", notes = "添加借阅记录", httpMethod = "POST")
@@ -43,5 +43,13 @@ public class BorrowRecordController {
         return ResponseResult.success(borrowRecordPageResult);
     }
 
+
+    @PutMapping
+    @ApiOperation(value = "根据借阅记录id归还书籍", notes = "还书", httpMethod = "PUT")
+    @ApiImplicitParam(name = "recordId", value = "借阅记录ID", required = true, dataType = "String", paramType = "query")
+    public ResponseResult<Void> returnBook(@RequestParam Integer recordId) {
+        borrowRecordService.returnBook(recordId);
+        return ResponseResult.success();
+    }
 
 }

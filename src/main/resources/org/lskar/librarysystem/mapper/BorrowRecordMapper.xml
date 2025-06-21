@@ -34,4 +34,19 @@
         </where>
     </select>
 
+    <select id="selectBorrowRecordById" resultType="org.lskar.librarysystem.entity.BorrowRecord">
+        SELECT *
+        FROM borrowRecord
+        WHERE record_id = #{id}
+    </select>
+
+    <select id="countBorrowRecordByReaderId" resultType="int">
+
+        SELECT COUNT(*)
+        FROM borrowRecord
+        WHERE user_id = #{id}
+
+    </select>
+
+
 </mapper>

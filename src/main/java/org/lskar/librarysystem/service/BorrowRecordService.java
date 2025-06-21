@@ -11,4 +11,7 @@ public interface BorrowRecordService {
     void update(BorrowRecord borrowRecord);
 
     PageResult<BorrowRecord> selectBorrowRecordByQueryParam(BorrowRecordQueryParam queryParam);
+
+
+    void returnBook(Integer recordId);
 }
