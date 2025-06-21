@@ -5,11 +5,15 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.lskar.librarysystem.entity.ResponseResult;
+import org.lskar.librarysystem.enums.HttpStatusEnum;
 import org.lskar.librarysystem.utils.JwtUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Slf4j
+//@Component
 @WebFilter(urlPatterns = "/*")
 public class TokenFilter implements Filter {
     @Override
@@ -24,7 +28,6 @@ public class TokenFilter implements Filter {
         if (requestURI.contains("/login")){
             log.info("登录请求, 放行");
             filterChain.doFilter(request, response);
-            return;
         }
 
         //3. 获取请求头中的token
