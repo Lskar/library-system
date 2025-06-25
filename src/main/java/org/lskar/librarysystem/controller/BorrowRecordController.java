@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import lombok.extern.slf4j.Slf4j;
 import org.lskar.librarysystem.entity.BorrowRecord;
 import org.lskar.librarysystem.entity.BorrowRecordQueryParam;
 import org.lskar.librarysystem.entity.PageResult;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/borrowRecords")
@@ -35,6 +37,8 @@ public class BorrowRecordController {
     @ApiOperation(value = "添加借阅记录", notes = "添加借阅记录", httpMethod = "POST")
     @ApiImplicitParam(name = "borrowRecord", value = "借阅记录对象", required = true, dataType = "BorrowRecord", paramType = "body")
     public ResponseResult<Void> addBorrowRecord(@RequestBody @Valid BorrowRecord borrowRecord) {
+
+        log.info("添加借阅记录：{}", borrowRecord);
         borrowRecordService.insert(borrowRecord);
         return ResponseResult.success();
     }
@@ -43,6 +47,8 @@ public class BorrowRecordController {
     @ApiOperation(value = "获取借阅记录列表", notes = "获取所有借阅记录的详细信息", httpMethod = "GET")
     @ApiImplicitParam(name = "queryParam", value = "查询参数", required = true, dataType = "BorrowRecordQueryParam", paramType = "query")
     public ResponseResult<PageResult<BorrowRecord>> page(@Valid BorrowRecordQueryParam queryParam) {
+
+        log.info("获取借阅记录列表：{}", queryParam);
         PageResult<BorrowRecord> borrowRecordPageResult = borrowRecordService.selectBorrowRecordByQueryParam(queryParam);
         return ResponseResult.success(borrowRecordPageResult);
     }
@@ -52,6 +58,8 @@ public class BorrowRecordController {
     @ApiOperation(value = "根据借阅记录id归还书籍", notes = "还书", httpMethod = "PUT")
     @ApiImplicitParam(name = "recordId", value = "借阅记录ID", required = true, dataType = "String", paramType = "query")
     public ResponseResult<Void> returnBook(@RequestParam @Min(value = 0, message = "id不允许为负数") Integer recordId) {
+
+        log.info("还书：{}", recordId);
         borrowRecordService.returnBook(recordId);
         return ResponseResult.success();
     }
