@@ -1,6 +1,7 @@
 package org.lskar.librarysystem.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,17 +16,24 @@ import java.time.LocalDate;
 public class Reader {
 
     @ApiModelProperty(value = "用户ID", required = true)
+    @NotBlank(message = "用户id不允许为空")
     private String userId;
+
     @ApiModelProperty(value = "用户名", required = true)
     private String name;
+
     @ApiModelProperty(value = "密码", required = true)
     private String password;
+
     @ApiModelProperty(value = "性别", required = true)
     private GenderEnum gender;
+
     @ApiModelProperty(value = "注册时间", required = true)
     private LocalDate enrollDate;
+
     @ApiModelProperty(value = "用户类型", required = true)
     private String userType;
+
     @ApiModelProperty(value = "借阅限制", required = true)
     private Integer borrowLimit;
 }

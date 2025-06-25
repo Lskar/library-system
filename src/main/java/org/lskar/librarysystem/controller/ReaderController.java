@@ -3,6 +3,7 @@ package org.lskar.librarysystem.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 import org.lskar.librarysystem.entity.Reader;
 import org.lskar.librarysystem.entity.ResponseResult;
 import org.lskar.librarysystem.service.ReaderService;
@@ -40,7 +41,7 @@ public class ReaderController {
     @PostMapping
     @ApiOperation(value = "添加读者",notes = "添加读者",httpMethod = "POST")
     @ApiImplicitParam(name = "reader",value = "读者对象",required = true,dataType = "Reader",paramType = "body")
-    public ResponseResult<Void> addReader(@RequestBody Reader reader) {
+    public ResponseResult<Void> addReader(@RequestBody @Valid Reader reader) {
         readerService.insert(reader);
         return ResponseResult.success();
     }
@@ -56,7 +57,7 @@ public class ReaderController {
     @PutMapping
     @ApiOperation(value = "更新读者",notes = "更新读者",httpMethod = "PUT")
     @ApiImplicitParam(name = "reader",value = "读者对象",required = true,dataType = "Reader",paramType = "body")
-    public ResponseResult<Void> updateReader(@RequestBody Reader reader) {
+    public ResponseResult<Void> updateReader(@RequestBody @Valid Reader reader) {
         readerService.update(reader);
         return ResponseResult.success();
     }

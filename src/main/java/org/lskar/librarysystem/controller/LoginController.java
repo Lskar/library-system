@@ -3,6 +3,7 @@ package org.lskar.librarysystem.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 import org.lskar.librarysystem.entity.LoginInfo;
 import org.lskar.librarysystem.entity.Reader;
 import org.lskar.librarysystem.entity.ResponseResult;
@@ -22,7 +23,7 @@ public class LoginController {
     @PostMapping("/login")
     @ApiOperation(value = "登录")
     @ApiImplicitParam(name = "reader",value = "读者对象",required = true,dataType = "Reader",paramType = "body")
-    public ResponseResult<LoginInfo> login(@RequestBody Reader reader) {
+    public ResponseResult<LoginInfo> login(@RequestBody @Valid Reader reader) {
         LoginInfo loginInfo = readerService.login(reader);
         return ResponseResult.success(loginInfo);
     }
